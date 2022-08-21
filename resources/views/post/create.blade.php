@@ -1,9 +1,12 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row">
-        <div class="col-md-10 mt-6">
+    <div class="row justify-content-center">
+        <div class="col-md-8 mt-6">
             <div class="card-body">
-                <h1 class="mt4">新規投稿</h1>
+                <h1 class="mt-4">新規投稿</h1>
+                @if (session('message'))
+                    <div class="alert alert-success">{{ session('message') }}</div>
+                @endif
                 <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
