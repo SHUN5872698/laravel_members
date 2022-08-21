@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -35,7 +36,15 @@ class PostController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    // インスタンスを作成
+    $post = new Post();
+
+    $post->title = $request->title;
+    $post->body = $request->body;
+    $post->user_id = auth()->user()->id;
+    // 保存
+    $post->save();
+    return back()->with('message', '投稿を作成しました');
   }
 
   /**
