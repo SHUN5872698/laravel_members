@@ -4,7 +4,8 @@
         <div class="col-md-10 mt-6">
             <div class="card-body">
                 <h1 class="mt4">新規投稿</h1>
-                <form enctype="multipart/form-data">
+                <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group">
                         <label for="title">件名</label>
                         <input type="text" name="title" class="form-control" id="title" placeholder="Enter Title">
