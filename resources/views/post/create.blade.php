@@ -10,6 +10,9 @@
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
+                            @if (empty($errors->first('image')))
+                                <li>画像ファイルがあれば、再度、選択してください。</li>
+                            @endif
                         </ul>
                     </div>
                 @endif
@@ -27,12 +30,11 @@
                         <textarea name="body" class="form-control" id="body" cols="30" rows="10">{{ old('body') }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="image">画像 </label>
+                        <label for="image">画像（1MBまで）</label>
                         <div class="col-md-6">
                             <input id="image" type="file" name="image">
                         </div>
                     </div>
-
                     <button type="submit" class="btn btn-success">送信する </button>
                 </form>
             </div>
