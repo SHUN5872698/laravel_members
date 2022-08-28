@@ -10,6 +10,14 @@ use Illuminate\Support\Carbon;
 class PostController extends Controller
 {
   /**
+   * ログイン認証
+   */
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
+  /**
    * Display a listing of the resource.
    *
    * @return \Illuminate\Http\Response
