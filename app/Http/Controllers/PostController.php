@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class PostController extends Controller
 {
@@ -48,6 +49,15 @@ class PostController extends Controller
     $post->title = $request->title;
     $post->body = $request->body;
     $post->user_id = auth()->user()->id;
+    // 画像がアップロードされていた場合保存
+    if (request('image')) {
+      // ファイル名に日時を追加
+      $original = request()->file('image')->getClientOriginalName();
+      // ファイル名に日時を追加
+      $name = Carbon::now()->format('Ymd_His') . '_' . $original;
+      request()->file('image')->move('storage/images', $name);
+      $post->image = $name;
+    }
     // 保存
     $post->save();
     return back()->with('message', '投稿を作成しました');
